@@ -397,27 +397,35 @@ def calBurnRate(arrScale, burnRate):
 st.write('You selected:', arrScale)
 
 arrGrowth = st.number_input('ARR Gorwth')
-st.write('ARR Growth is ', arrGrowth)
+st.write('ARR Growth Score is ', int(arrGrowth), '%')
 
 NDR = st.number_input('NDR')
-st.write('Net Dollar Retention is ', NDR)
+st.write('Net Dollar Retention Score is ', int(NDR), '%')
 
 R40 = st.number_input('Rule of 40')
-st.write('Rule of 40 is ', R40)
+st.write('Rule of 40 Score is ', int(R40), '%')
 
 NMN = st.number_input('Net Magic Number')
-st.write('Net Magic Number is ', NMN)
+st.write('Net Magic Number Score is ', NMN)
 
 ARRFTE = st.number_input('ARR per FTE') * 1000
-st.write('ARR per FTE is ', ARRFTE)
+st.write('ARR per FTE Score is ', int(ARRFTE),'k')
 
-burnRate = st.number_input('burnRate', max_value=1.0)
-st.write('Burn Rate is ', burnRate)
+burnRate = st.number_input('Burn Rate', max_value=1.0)
+st.write('Burn Rate Score is ', burnRate)
 
-score = 'Composite score is ' + str(calScore(arrScale, arrGrowth,NDR,R40,NMN,ARRFTE,burnRate))
+score = int(calScore(arrScale, arrGrowth,NDR,R40,NMN,ARRFTE,burnRate))
+
+
 
 # st.write('Composite score is', calScore(arrScale, arrGrowth,NDR,R40,NMN,ARRFTE,burnRate))
-st.header(score)
+st.header('Composite Score is ' + str(score))
+
+if score >= 75:
+    st.header('Pass')
+else:
+    st.header('No Pass')
+
 
 
 # Streamlit widgets automatically run the script from top to bottom. Since
