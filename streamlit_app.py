@@ -13,13 +13,13 @@ def calScore(arrScale, arrGrowth, NDR, R40, NMN, ARRFTE, burnRate):
     if arrScale == '<$10M':
         return 0.4 * calArrGrowth('<$10M', arrGrowth) + 0.2 * calNDR('<$10M', NDR) + 0.15 * calNMN('<$10M', NMN) + 0.15 * calARRFTE('<$10M',ARRFTE) + 0.1 * calBurnRate('<$10M',burnRate)
     elif arrScale == '$10-$25M':
-        return 0.3 * calArrGrowth('$10-$25M', arrGrowth) + 0.3 * calNDR('$10-$25M', NDR) + 0.15 * calNMN('$10-$25M', NMN) + 0.15 * calARRFTE('$10-$25M',ARRFTE) + 0.1 * calBurnRate('$10-$25M',burnRate)
+        return 0.35 * calArrGrowth('$10-$25M', arrGrowth) + 0.25 * calNDR('$10-$25M', NDR) + 0.15 * calNMN('$10-$25M', NMN) + 0.15 * calARRFTE('$10-$25M',ARRFTE) + 0.1 * calBurnRate('$10-$25M',burnRate)
     elif arrScale == '$25-$50M':
-        return 0.25 * calArrGrowth('$25-$50M', arrGrowth) + 0.2 * calNDR('$25-$50M', NDR) + 0.15 * calR40('$25-$50M', R40) + 0.15 * calNMN('$25-$50M', NMN) + 0.15 * calARRFTE('$25-$50M',ARRFTE) + 0.1 * calBurnRate('$25-$50M',burnRate)
+        return 0.3 * calArrGrowth('$25-$50M', arrGrowth) + 0.2 * calNDR('$25-$50M', NDR) + 0.1 * calR40('$25-$50M', R40) + 0.20 * calNMN('$25-$50M', NMN) + 0.1 * calARRFTE('$25-$50M',ARRFTE) + 0.1 * calBurnRate('$25-$50M',burnRate)
     elif arrScale == '$50-$100M':
-        return 0.25 * calArrGrowth('$50-$100M', arrGrowth) + 0.15 * calNDR('$50-$100M', NDR) + 0.15 * calR40('$50-$100M', R40) + 0.15 * calNMN('$50-$100M', NMN) + 0.15 * calARRFTE('$50-$100M',ARRFTE) + 0.1 * calBurnRate('$50-$100M',burnRate)
+        return 0.3 * calArrGrowth('$50-$100M', arrGrowth) + 0.2 * calNDR('$50-$100M', NDR) + 0.1 * calR40('$50-$100M', R40) + 0.2 * calNMN('$50-$100M', NMN) + 0.1 * calARRFTE('$50-$100M',ARRFTE) + 0.1 * calBurnRate('$50-$100M',burnRate)
     elif arrScale == '$100M+':
-        return 0.25 * calArrGrowth('$100M+', arrGrowth) + 0.15 * calNDR('$100M+', NDR) + 0.15 * calR40('$100M+', R40) + 0.15 * calNMN('$100M+', NMN) + 0.15 * calARRFTE('$100M+',ARRFTE) + 0.1 * calBurnRate('$100M+',burnRate)
+        return 0.25 * calArrGrowth('$100M+', arrGrowth) + 0.15 * calNDR('$100M+', NDR) + 0.15 * calR40('$100M+', R40) + 0.15 * calNMN('$100M+', NMN) + 0.15 * calARRFTE('$100M+',ARRFTE) + 0.15 * calBurnRate('$100M+',burnRate)
 
     return 
 
