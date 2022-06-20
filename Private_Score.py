@@ -109,7 +109,7 @@ def calNDR(arrScale, NDR):
 
     if arrScale == '<$10M':
 
-        if not NDR:
+        if NDR< 80:
             return 0
 
         if 80 < NDR <= 100:
@@ -123,7 +123,10 @@ def calNDR(arrScale, NDR):
 
     elif arrScale == '$10-$25M':
 
-        if 80 < NDR <= 100:
+        if NDR < 80:
+            return 0
+        
+        elif 80 < NDR <= 100:
             return (NDR - 80) / (100 - 80) * 25
         elif 100 < NDR <= 115:
             return 25 + (NDR - 100) / (115 - 100) * 25
@@ -276,7 +279,7 @@ def calARRFTE(arrScale, ARRFTE):
 
     if arrScale == '<$10M':
 
-        if not ARRFTE:
+        if ARRFTE < 10000:
             return 0
     
         if 10000 < ARRFTE <= 30000:
@@ -289,6 +292,9 @@ def calARRFTE(arrScale, ARRFTE):
             return 75 + (ARRFTE - 73000) / (105000 - 73000) * 25
     
     elif arrScale == '$10-$25M':
+
+        if ARRFTE < 60000:
+            return 0
 
         if 60000 < ARRFTE <= 90000:
             return (ARRFTE - 60000) / (90000 - 60000) * 25
@@ -402,25 +408,37 @@ def calBurnRate(arrScale, burnRate):
        
     return 0
 
-st.write('You selected:', arrScale)
+st.metric(label = 'ARR scale', value = arrScale)
+# st.text('You selected: ' + arrScale)
+# st.write('You selected:')
 
-arrGrowth = st.number_input('ARR Gorwth')
-st.write('ARR Growth Score is ', int(arrGrowth), '%')
+arrGrowth = st.number_input('ARR Growth (in %)', step = 1)
+st.metric(label = 'ARR Growth Score', value = calArrGrowth(arrScale, arrGrowth))
+# st.text('ARR Growth Score is ' + str(calArrGrowth(arrScale, arrGrowth)))
+# st.write('ARR Growth Score is ', int(arrGrowth), '%')
 
-NDR = st.number_input('NDR')
-st.write('Net Dollar Retention Score is ', int(NDR), '%')
+NDR = st.number_input('NDR (in %)', step = 1)
+st.metric(label = 'Net Dollar Retention Score', value = calNDR(arrScale, NDR))
+# st.text('Net Dollar Retention Score is ' + str(calNDR(arrScale, NDR)))
+# st.write('Net Dollar Retention Score is ', int(NDR), '%')
 
 R40 = st.number_input('Rule of 40')
-st.write('Rule of 40 Score is ', int(R40), '%')
+st.metric(label = 'Rule of 40 Score' , value = calR40(arrScale, R40))
+# st.text('Rule of 40 Score is ' +  str(calR40(arrScale,R40)))
+# st.write('Rule of 40 Score is ', int(R40), '%')
 
 NMN = st.number_input('Net Magic Number')
-st.write('Net Magic Number Score is ', NMN)
+st.metric(label = 'Net Magic Number Score', value = calNMN(arrScale, NMN))
+# st.write('Net Magic Number Score is ', calNMN(arrScale,NMN))
+# st.write('Net Magic Number Score is ', NMN)
 
-ARRFTE = st.number_input('ARR per FTE') * 1000
-st.write('ARR per FTE Score is ', int(ARRFTE),'k')
+ARRFTE = st.number_input('ARR per FTE (in k)') * 1000
+st.metric(label = 'ARR per FTE Score', value = calARRFTE(arrScale, ARRFTE))
+# st.write('ARR per FTE Score is ', int(ARRFTE),'k')
 
-burnRate = st.number_input('Burn Rate', max_value=1.0)
-st.write('Burn Rate Score is ', burnRate)
+burnRate = st.number_input('Burn Rate', max_value=1.0, step = 0.1)
+st.metric(label = 'Burn Rate Score ', value = calBurnRate(arrScale, burnRate))
+# st.write('Burn Rate Score is ', burnRate)
 
 score = int(calScore(arrScale, arrGrowth,NDR,R40,NMN,ARRFTE,burnRate))
 
@@ -430,9 +448,9 @@ score = int(calScore(arrScale, arrGrowth,NDR,R40,NMN,ARRFTE,burnRate))
 st.header('Composite Score is ' + str(score))
 
 if score >= 75:
-    st.header('Pass')
+    st.header('Passing')
 else:
-    st.header('No Pass')
+    st.header('No Passing')
 
 
 
