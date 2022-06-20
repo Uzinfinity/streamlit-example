@@ -15,7 +15,7 @@ def calScore(arrScale, arrGrowth, NDR, R40, NMN, ARRFTE, burnRate):
     elif arrScale == '$10-$25M':
         return 0.35 * calArrGrowth('$10-$25M', arrGrowth) + 0.25 * calNDR('$10-$25M', NDR) + 0.15 * calNMN('$10-$25M', NMN) + 0.15 * calARRFTE('$10-$25M',ARRFTE) + 0.1 * calBurnRate('$10-$25M',burnRate)
     elif arrScale == '$25-$50M':
-        return 0.3 * calArrGrowth('$25-$50M', arrGrowth) + 0.2 * calNDR('$25-$50M', NDR) + 0.1 * calR40('$25-$50M', R40) + 0.20 * calNMN('$25-$50M', NMN) + 0.1 * calARRFTE('$25-$50M',ARRFTE) + 0.1 * calBurnRate('$25-$50M',burnRate)
+        return 0.3 * calArrGrowth('$25-$50M', arrGrowth) + 0.2 * calNDR('$25-$50M', NDR) + 0.1 * calR40('$25-$50M', R40) + 0.2 * calNMN('$25-$50M', NMN) + 0.1 * calARRFTE('$25-$50M',ARRFTE) + 0.1 * calBurnRate('$25-$50M',burnRate)
     elif arrScale == '$50-$100M':
         return 0.3 * calArrGrowth('$50-$100M', arrGrowth) + 0.2 * calNDR('$50-$100M', NDR) + 0.1 * calR40('$50-$100M', R40) + 0.2 * calNMN('$50-$100M', NMN) + 0.1 * calARRFTE('$50-$100M',ARRFTE) + 0.1 * calBurnRate('$50-$100M',burnRate)
     elif arrScale == '$100M+':
@@ -30,70 +30,78 @@ def calArrGrowth(arrScale, arrGrowth):
         if not arrGrowth:
             return 0
 
-        if arrGrowth <= 100:
+        if arrGrowth <= 75:
             return arrGrowth / 100 * 25
-        elif 100 < arrGrowth <= 210:
-            return 25 + (arrGrowth - 100) / (210 - 100) * 25
-        elif 210 < arrGrowth <= 325:
-            return 50 + (arrGrowth - 210) / (325 - 210) * 25
+        elif 75 < arrGrowth <= 150:
+            return 25 + (arrGrowth - 75) / (150 - 75) * 25
+        elif 150 < arrGrowth <= 225:
+            return 50 + (arrGrowth - 150) / (225 - 150) * 25
+        elif 225 < arrGrowth <= 325:
+            return 75 + (arrGrowth - 225) / (325 - 225) * 25
         else:
-            return 75 + (arrGrowth - 325) / (400 - 325) * 25
+            return 100
+        
 
     elif arrScale == '$10-$25M':
 
         if not arrGrowth:
             return 0
 
-        if arrGrowth <= 80:
+        if arrGrowth <= 50:
             return 0
-        elif 80 < arrGrowth <= 100:
-            return (arrGrowth - 80) / (100 - 80) * 25
-        elif 100 < arrGrowth <= 135:
-            return 25 + (arrGrowth - 100) / (135 - 100) * 25
-        elif 135 < arrGrowth <= 175:
-            return 50 + (arrGrowth - 135) / (175 - 135) * 25
+        elif 50 < arrGrowth <= 75:
+            return (arrGrowth - 50) / (75 - 50) * 25
+        elif 75 < arrGrowth <= 125:
+            return 25 + (arrGrowth - 75) / (125 - 75) * 25
+        elif 125 < arrGrowth <= 175:
+            return 50 + (arrGrowth - 125) / (175 - 125) * 25
+        elif 175 < arrGrowth <= 225:
+            return 75 + (arrGrowth - 175) / (225 - 175) * 25
         else:
-            return 75 + (arrGrowth - 175) / (300 - 175) * 25
+            return 100
+
 
     elif arrScale == '$25-$50M':
 
-        if arrGrowth <= 30:
+        if arrGrowth <= 15:
             return 0
-        elif 30 < arrGrowth <= 60:
-            return (arrGrowth - 30) / (60 - 30) * 25
-        elif 60 < arrGrowth <= 90:
-            return 25 + (arrGrowth - 60) / (90 - 60) * 25
+        elif 15 < arrGrowth <= 40:
+            return (arrGrowth - 15) / (40 - 15) * 25
+        elif 40 < arrGrowth <= 65:
+            return 25 + (arrGrowth - 40) / (65 - 40) * 25
+        elif 65 < arrGrowth <= 90:
+            return 50 + (arrGrowth - 65) / (90 - 65) * 25
         elif 90 < arrGrowth <= 115:
-            return 50 + (arrGrowth - 90) / (115 - 90) * 25
+            return 75 + (arrGrowth - 90) / (115 - 90) * 25
         else:
-            return 75 + (arrGrowth - 115) / (150 - 115) * 25
+            return 100
        
     elif arrScale == '$50-$100M':
 
-        if arrGrowth <= 10:
+        if arrGrowth <= 15:
             return 0
-        elif 10 < arrGrowth <= 30:
-            return (arrGrowth - 10) / (30 - 10) * 25
-        elif 30 < arrGrowth <= 65:
-            return 25 + (arrGrowth - 30) / (65 - 30) * 25
-        elif 65 < arrGrowth <= 105:
-            return 50 + (arrGrowth - 65) / (105 - 65) * 25
+        elif 15 < arrGrowth <= 30:
+            return (arrGrowth - 15) / (30 - 15) * 25
+        elif 30 < arrGrowth <= 55:
+            return 25 + (arrGrowth - 30) / (55 - 30) * 25
+        elif 55 < arrGrowth <= 80:
+            return 50 + (arrGrowth - 55) / (80 - 55) * 25
         else:
-            return 75 + (arrGrowth - 105) / (120 - 105) * 25
+            return 75 + (arrGrowth - 80) / (105 - 80) * 25
 
        
     elif arrScale == '$100M+':
 
         if arrGrowth <= 10:
-            return 0
-        elif 10 < arrGrowth <= 30:
-            return (arrGrowth - 10) / (30 - 10) * 25
-        elif 30 < arrGrowth <= 45:
-            return 25 + (arrGrowth - 30) / (45 - 30) * 25
-        elif 45 < arrGrowth <= 70:
-            return 50 + (arrGrowth - 45) / (70 - 45) * 25
+            return arrGrowth / 10 * 25
+        elif 10 < arrGrowth <= 25:
+            return 25 + (arrGrowth - 10) / (25 - 10) * 25
+        elif 25 < arrGrowth <= 50:
+            return 50 + (arrGrowth - 25) / (50 - 25) * 25
+        elif 50 < arrGrowth <= 75:
+            return 75 + (arrGrowth - 50) / (75 - 50) * 25
         else:
-            return 75 + (arrGrowth - 70) / (90 - 70) * 25
+            100
        
     return 0
 
